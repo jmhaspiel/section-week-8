@@ -25,7 +25,7 @@ def params_unique_combination(baseurl, params_d, private_keys=["api_key"]):
             res.append("{}-{}".format(k, params_d[k]))
     return baseurl + "_".join(res)
 
-def search_flickr(tags = "", photo_id = "" ):
+def search_flickr(tags = "stuff2", photo_id = "stuff" ):
     if not FLICKR_API_KEY:
         raise Exception('Flickr API Key is missing!')
 
@@ -48,6 +48,8 @@ def search_flickr(tags = "", photo_id = "" ):
         "method": "flickr.photos.getInfo",
         "nojsoncallback": 1
     }
+
+    #MORE CHANGES HERE
 
     unique_ident = params_unique_combination(baseurl,params_diction)
     if unique_ident in CACHE_DICTION:
