@@ -25,17 +25,27 @@ def params_unique_combination(baseurl, params_d, private_keys=["api_key"]):
             res.append("{}-{}".format(k, params_d[k]))
     return baseurl + "_".join(res)
 
-def search_flickr_by_tags(tags):
+def search_flickr(tags = "", photo_id = "" ):
     if not FLICKR_API_KEY:
         raise Exception('Flickr API Key is missing!')
 
     baseurl = "https://api.flickr.com/services/rest/"
-    params_diction = {
-        "method": "flickr.photos.search",
+   
+    if tags != "":
+        params_diction = {
         "format": "json",
         "api_key": FLICKR_API_KEY,
         "tags": tags,
+        "method": "flickr.photos.search",
         "per_page": 10,
+        "nojsoncallback": 1
+    }
+    else:
+        params_diction = {
+        "format": "json",
+        "api_key": FLICKR_API_KEY,
+        "photo_id" : photo_id,
+        "method": "flickr.photos.getInfo",
         "nojsoncallback": 1
     }
 
